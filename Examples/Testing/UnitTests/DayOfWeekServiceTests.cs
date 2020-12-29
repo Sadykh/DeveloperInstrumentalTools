@@ -13,7 +13,7 @@ namespace UnitTests
         public void IsWeekendPositiveLastWeekend()
         {
             var date = new DateTime(2020, 12, 27);
-            _dayOfWeekService.IsWeekend(date).Should().Be(true);
+            _dayOfWeekService.IsWeekend(date).Should().BeTrue();
         }
 
         [Test]
@@ -21,7 +21,7 @@ namespace UnitTests
         {
             var date = new DateTime(2019, 12, 28);
 
-            _dayOfWeekService.IsWeekend(date).Should().Be(true);
+            _dayOfWeekService.IsWeekend(date).Should().BeTrue();
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace UnitTests
         {
             var date = new DateTime(2020, 12, 29);
 
-            _dayOfWeekService.IsWeekend(date).Should().Be(false);
+            _dayOfWeekService.IsWeekend(date).Should().BeFalse();
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace UnitTests
         {
             var date = new DateTime(2019, 12, 30);
 
-            _dayOfWeekService.IsWeekend(date).Should().Be(false);
+            _dayOfWeekService.IsWeekend(date).Should().BeFalse();
         }
     }
 }
