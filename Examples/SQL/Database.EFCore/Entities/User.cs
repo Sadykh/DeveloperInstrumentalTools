@@ -1,4 +1,12 @@
-$HEADER$namespace $NAMESPACE$
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Database.EFCore.Entities
 {
-  public class $CLASS$ {$END$}
+    [Table("user")]
+    public class User
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+    }
 }

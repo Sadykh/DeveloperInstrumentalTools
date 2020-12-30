@@ -9,79 +9,72 @@ namespace Database.EFCore.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Summary",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Code = table.Column<string>(nullable: true)
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Summary", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_User", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Weather",
+                name: "News",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    SummaryId = table.Column<int>(nullable: true),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
-                    Temperature = table.Column<decimal>(nullable: false)
+                    Title = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Weather", x => x.Id);
+                    table.PrimaryKey("PK_News", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Weather_Summary_SummaryId",
-                        column: x => x.SummaryId,
-                        principalTable: "Summary",
+                        name: "FK_News_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
-                table: "Summary",
-                columns: new[] { "Id", "Code" },
+                table: "User",
+                columns: new[] {"Id", "Name"},
                 values: new object[,]
                 {
-                    { 1, "Freezing" },
-                    { 2, "Bracing" },
-                    { 3, "Chilly" },
-                    { 4, "Cool" },
-                    { 5, "Mild" },
-                    { 6, "Warm" },
-                    { 7, "Balmy" },
-                    { 8, "Hot" },
-                    { 9, "Sweltering" },
-                    { 10, "Scorching" }
+                    {1, "Alex"},
+                    {2, "Nasty"},
+                    {3, "Oleg"},
+                    {4, "Vlad"},
+                    {5, "Kostya"},
                 });
 
             migrationBuilder.InsertData(
-                table: "Weather",
-                columns: new[] { "Id", "Date", "SummaryId", "Temperature" },
+                table: "News",
+                columns: new[] {"Id", "Date", "UserId", "Title"},
                 values: new object[,]
                 {
-                    { 3, new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, -10m },
-                    { 1, new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, -1.3m },
-                    { 2, new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 5.1m }
+                    {1, new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "First title"},
+                    {3, new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Second title"},
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Weather_SummaryId",
-                table: "Weather",
-                column: "SummaryId");
+                name: "IX_News_UserId",
+                table: "News",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Weather");
+                name: "News");
 
             migrationBuilder.DropTable(
-                name: "Summary");
+                name: "User");
         }
     }
 }

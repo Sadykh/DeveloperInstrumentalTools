@@ -5,8 +5,8 @@ using Database.EFCore.Entities;
 
 namespace Database.EFCore.Contracts
 {
-    public interface IUserDataAccess
+    public interface INewsDataAccess
     {
-        Task<IEnumerable<User>> GetAllAsync(CancellationToken ct = default);
+        Task<IEnumerable<News>> GetAllAsync(CancellationToken ct = default);
     }
 }

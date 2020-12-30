@@ -22,7 +22,7 @@ services:
   app:
     container_name: 'news.app'
     build:
-      context: ../
+      context: ./
       dockerfile: app.dockerfile
     ports:
       - "5000:5000"

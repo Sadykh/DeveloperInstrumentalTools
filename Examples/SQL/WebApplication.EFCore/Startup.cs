@@ -31,7 +31,7 @@ namespace WebApplication.EFCore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<IWeatherDataAccess, WeatherDataAccess>();
+            services.AddScoped<INewsDataAccess, NewsDataAccess>();
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddDbContext<ExampleContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("ExampleDbContext")));
